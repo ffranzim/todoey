@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey_flutter/models/task.dart';
+import 'package:todoey_flutter/models/task_data.dart';
 import 'package:todoey_flutter/screen/add_task_screen.dart';
 import 'package:todoey_flutter/screen/task_list.dart';
 
 const kLightBlueAccent = Colors.lightBlueAccent;
 const kWhite = Colors.white;
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk', isDone: true),
-    Task(name: 'Buy eggs', isDone: true),
-    Task(name: 'Buy bread', isDone: false),
-  ];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +20,9 @@ class _TaskScreenState extends State<TaskScreen> {
             context: context,
             builder: (context) =>
                 AddTaskScreen(addTaskCallback: (newTaskTitle) {
-              setState(() {
-                tasks.add(Task(name: newTaskTitle));
-              });
+              Provider.of<TaskData>(context)
+                  .tasks
+                  .add(Task(name: newTaskTitle));
               Navigator.pop(context);
             }),
           );
@@ -68,7 +59,7 @@ class _TaskScreenState extends State<TaskScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  '${tasks.length} Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: kWhite,
                     fontSize: 16.0,
@@ -79,16 +70,15 @@ class _TaskScreenState extends State<TaskScreen> {
           ),
           Expanded(
             child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
-                decoration: BoxDecoration(
-                  color: kWhite,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0)),
-                ),
-                child: TaskList(
-                  tasks,
-                )),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                color: kWhite,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0),
+                    topRight: Radius.circular(20.0)),
+              ),
+              child: TaskList(),
+            ),
           )
         ],
       ),
