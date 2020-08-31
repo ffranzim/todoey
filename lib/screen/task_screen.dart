@@ -3,6 +3,9 @@ import 'package:todoey_flutter/models/task.dart';
 import 'package:todoey_flutter/screen/add_task_screen.dart';
 import 'package:todoey_flutter/screen/task_list.dart';
 
+const kLightBlueAccent = Colors.lightBlueAccent;
+const kWhite = Colors.white;
+
 class TaskScreen extends StatefulWidget {
   @override
   _TaskScreenState createState() => _TaskScreenState();
@@ -18,7 +21,7 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: kLightBlueAccent,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
@@ -33,7 +36,7 @@ class _TaskScreenState extends State<TaskScreen> {
             }),
           );
         },
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: kLightBlueAccent,
         child: Icon(Icons.add),
       ),
       body: Column(
@@ -49,9 +52,9 @@ class _TaskScreenState extends State<TaskScreen> {
                   child: Icon(
                     Icons.list,
                     size: 30.0,
-                    color: Colors.lightBlueAccent,
+                    color: kLightBlueAccent,
                   ),
-                  backgroundColor: Colors.white,
+                  backgroundColor: kWhite,
                   radius: 30.0,
                 ),
                 SizedBox(
@@ -60,14 +63,14 @@ class _TaskScreenState extends State<TaskScreen> {
                 Text(
                   'Todoey',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: kWhite,
                       fontSize: 40.0,
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
                   '${tasks.length} Tasks',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: kWhite,
                     fontSize: 16.0,
                   ),
                 ),
@@ -78,7 +81,7 @@ class _TaskScreenState extends State<TaskScreen> {
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: kWhite,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0)),
